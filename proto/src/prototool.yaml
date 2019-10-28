@@ -119,21 +119,18 @@ generate:
   go_options:
     # The base import path. This should be the go path of the prototool.yaml file.
     # This is required if you have any go plugins.
-    import_path: /Users/kibernum/Documents/REPOSGITHUB/blastdoor-ms/company/awesomeProject/gen
+    import_path: ../../gen
   plugins:
     - name: go
       type: go
       flags: plugins=grpc
-      output: /Users/kibernum/Documents/REPOSGITHUB/blastdoor-ms/company/awesomeProject/gen
-      path: /Users/kibernum/.go/bin/protoc-gen-go
+      output: ../../gen
 
     - name: grpc-gateway
       type: go
-      output: /Users/kibernum/Documents/REPOSGITHUB/blastdoor-ms/company/awesomeProject/gen
-      path: /Users/kibernum/.go/bin/protoc-gen-grpc-gateway
+      output: ../../gen
 
     - name: swagger
       type: go
-      output: /Users/kibernum/Documents/REPOSGITHUB/blastdoor-ms/company/awesomeProject/gen
-      path: /Users/kibernum/.go/bin/protoc-gen-swagger
+      output: ../../gen
 

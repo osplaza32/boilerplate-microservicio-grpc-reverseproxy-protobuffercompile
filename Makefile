@@ -20,4 +20,18 @@ down: ## down docker compose
 vendor: ## dowload all dependecies
 	go mod vendor
 	cd proto && glide install
-.PHONY: help  prepare install vendor run up down
+# general
+WORKDIR = $(PWD)
+
+# coverage
+COVERAGE_REPORT = coverage.txt
+COVERAGE_PROFILE = profile.out
+COVERAGE_MODE = atomic
+MY_VAR := $(shell find $(WORKDIR) -name "*.go" -not -path "*/vendor/*" -not -path "*/gen/*" | grep -o '.*/' |uniq  | xargs)
+
+coverage: ## Coverage test
+	@cd $(WORKDIR); \
+	go test -v  -race ${MY_VAR} -coverprofile=$(COVERAGE_PROFILE) -covermode=$(COVERAGE_MODE);
+compile: ## compile protobuffer
+	@cd $(WORKDIR)/proto/src; \
+	prototool compile
