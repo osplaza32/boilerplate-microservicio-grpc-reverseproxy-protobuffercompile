@@ -485,7 +485,7 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// EntityserviceAPIClient is the client API for EntityserviceAPI servicegrpc.
+// EntityserviceAPIClient is the client API for EntityserviceAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type EntityserviceAPIClient interface {
@@ -521,7 +521,7 @@ func (c *entityserviceAPIClient) GetEntity(ctx context.Context, in *GetEntityReq
 	return out, nil
 }
 
-// EntityserviceAPIServer is the server API for EntityserviceAPI servicegrpc.
+// EntityserviceAPIServer is the server API for EntityserviceAPI service.
 type EntityserviceAPIServer interface {
 	//Doc.
 	Entity(context.Context, *EntityRequest) (*EntityResponse, error)

@@ -17,7 +17,7 @@ func Run(s *servicegrpc.Server) error {
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	var mux = runtime.NewServeMux(runtime.WithMetadata(s.Theotherfn),runtime.WithProtoErrorHandler(s.ProtoErrorHerror))
+	var mux = runtime.NewServeMux(runtime.WithMetadata(s.Theotherfn))
 	opts := []grpc.DialOption{grpc.WithInsecure()}
 	err := entityv1.RegisterEntityserviceAPIHandlerFromEndpoint(ctx, mux,"localhost"+s.GetPort(), opts)
 	err = healthv1.RegisterHealthAPIHandlerFromEndpoint(ctx,mux,"localhost"+s.GetPort(),opts)

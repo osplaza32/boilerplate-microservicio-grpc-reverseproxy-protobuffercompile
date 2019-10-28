@@ -17,7 +17,7 @@
   "paths": {
     "/v1/core/healthcheck": {
       "get": {
-        "summary": "If the requested service is unknown, the call will fail with status\nNOT_FOUND.",
+        "summary": "If the requested servicegrpc is unknown, the call will fail with status\nNOT_FOUND.",
         "operationId": "Check",
         "responses": {
           "200": {

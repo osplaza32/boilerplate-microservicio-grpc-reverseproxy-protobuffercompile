@@ -18,11 +18,6 @@ type Server struct {
 	loguber          *zap.Logger
 
 }
-
-func (s *Server) ProtoErrorHerror(context.Context, *ServeMux, Marshaler, http.ResponseWriter, *http.Request, error){
-
-}
-
 func (s *Server) Check(ctx context.Context,req *healthv1.CheckRequest) (*healthv1.CheckResponse, error) {
 	return &healthv1.CheckResponse{Status:healthv1.CheckResponse_SERVING},nil
 }

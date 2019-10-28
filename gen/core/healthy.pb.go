@@ -58,7 +58,7 @@ func (CheckResponse_ServingStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type CheckRequest struct {
-	Service              string   `protobuf:"bytes,1,opt,name=servicegrpc,proto3" json:"servicegrpc,omitempty"`
+	Service              string   `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -178,7 +178,7 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// HealthAPIClient is the client API for HealthAPI servicegrpc.
+// HealthAPIClient is the client API for HealthAPI service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type HealthAPIClient interface {
@@ -252,7 +252,7 @@ func (x *healthAPIWatchClient) Recv() (*CheckResponse, error) {
 	return m, nil
 }
 
-// HealthAPIServer is the server API for HealthAPI servicegrpc.
+// HealthAPIServer is the server API for HealthAPI service.
 type HealthAPIServer interface {
 	// If the requested servicegrpc is unknown, the call will fail with status
 	// NOT_FOUND.
