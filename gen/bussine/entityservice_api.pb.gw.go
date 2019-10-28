@@ -119,7 +119,7 @@ func local_request_EntityserviceAPI_GetEntity_0(ctx context.Context, marshaler r
 
 }
 
-// RegisterEntityserviceAPIHandlerServer registers the http handlers for service EntityserviceAPI to "mux".
+// RegisterEntityserviceAPIHandlerServer registers the http handlers for servicegrpc EntityserviceAPI to "mux".
 // UnaryRPC     :call EntityserviceAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 func RegisterEntityserviceAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server EntityserviceAPIServer) error {
@@ -192,13 +192,13 @@ func RegisterEntityserviceAPIHandlerFromEndpoint(ctx context.Context, mux *runti
 	return RegisterEntityserviceAPIHandler(ctx, mux, conn)
 }
 
-// RegisterEntityserviceAPIHandler registers the http handlers for service EntityserviceAPI to "mux".
+// RegisterEntityserviceAPIHandler registers the http handlers for servicegrpc EntityserviceAPI to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
 func RegisterEntityserviceAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	return RegisterEntityserviceAPIHandlerClient(ctx, mux, NewEntityserviceAPIClient(conn))
 }
 
-// RegisterEntityserviceAPIHandlerClient registers the http handlers for service EntityserviceAPI
+// RegisterEntityserviceAPIHandlerClient registers the http handlers for servicegrpc EntityserviceAPI
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "EntityserviceAPIClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "EntityserviceAPIClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in

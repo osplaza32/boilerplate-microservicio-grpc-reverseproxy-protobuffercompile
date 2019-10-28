@@ -88,4 +88,4 @@ fabric.properties
 go.sum
 vendor
 */vendor
-proto/src/*.lock
+proto/*.lock

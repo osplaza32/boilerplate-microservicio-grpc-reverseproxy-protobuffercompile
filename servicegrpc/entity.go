@@ -1,4 +1,4 @@
-package service
+package servicegrpc
 
 import (
 	entityv1 "awesomeProject/gen/bussine"
@@ -6,6 +6,7 @@ import (
 	"context"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"net"
 	"net/http"
@@ -17,17 +18,19 @@ type Server struct {
 	loguber    *zap.Logger
 }
 
-func (s *Server) Check(context.Context, *healthv1.CheckRequest) (*healthv1.CheckResponse, error) {
-	panic("implement me")
+func (s *Server) Check(ctx context.Context,req *healthv1.CheckRequest) (*healthv1.CheckResponse, error) {
+	return &healthv1.CheckResponse{Status:healthv1.CheckResponse_SERVING},nil
 }
 
-func (s *Server) Watch(*healthv1.CheckRequest, healthv1.HealthAPI_WatchServer) error {
+func (s *Server) Watch(cctx *healthv1.CheckRequest,req healthv1.HealthAPI_WatchServer) error {
 	panic("implement me")
 }
 
 func (s *Server)Theotherfn(ctx context.Context,req *http.Request) metadata.MD{
+	s.GetLogUber().Info("GET entro GRPC")
+
 	as := metadata.MD{}
-	as.Append("Hola","CHAO")
+	as.Set("x-apikey",req.Header.Get("x-apikey"))
 	return as
 }
 
@@ -65,14 +68,31 @@ func SetAddr(addr string) ServerOption {
 }
 
 func (s *Server) Start() (*grpc.Server, net.Listener, error) {
+	s.GetLogUber().Info("GET STARED GRPC")
+
 	lis, err := net.Listen("tcp", s.addr)
 	if err != nil {
 		return nil, nil, err
 	}
-	gs := grpc.NewServer()
+	gs := grpc.NewServer(grpc.UnaryInterceptor(s.unaryInterceptor))
 	return gs, lis,nil
 }
+func (s *Server)unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error)  {
+	meta, ok := metadata.FromIncomingContext(ctx)
+	if !ok {
+		return nil, grpc.Errorf(codes.Unauthenticated, "missing context metadata")
+	}
+	s.loguber.Sugar().Info(meta)
 
+	if len(meta["x-apikey"]) != 1 {
+		return nil, grpc.Errorf(codes.Unauthenticated, "invalid token")
+	}
+	if meta["x-apikey"][0] != "06320a5975084b9db9ebbdece33e7eb5" {
+		return nil, grpc.Errorf(codes.Unauthenticated, "invalid token")
+	}
+
+	return handler(ctx, req)
+}
 func (s *Server) GetPort() string{
 	return s.addr
 }

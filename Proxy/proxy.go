@@ -3,7 +3,7 @@ package Proxy
 import (
 	entityv1 "awesomeProject/gen/bussine"
 	healthv1 "awesomeProject/gen/core"
-	"awesomeProject/service"
+	"awesomeProject/servicegrpc"
 	"context"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -12,7 +12,7 @@ import (
 "net/http"
 )
 
-func Run(s *service.Server) error {
+func Run(s *servicegrpc.Server) error {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
@@ -25,6 +25,7 @@ func Run(s *service.Server) error {
 		fmt.Println(err)
 		return err
 	}
+	s.GetLogUber().Info("GET STARED PROXY")
 
 	return http.ListenAndServe(":8080", mux)
 }

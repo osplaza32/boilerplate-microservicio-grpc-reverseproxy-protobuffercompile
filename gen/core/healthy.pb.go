@@ -58,7 +58,7 @@ func (CheckResponse_ServingStatus) EnumDescriptor() ([]byte, []int) {
 }
 
 type CheckRequest struct {
-	Service              string   `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
+	Service              string   `protobuf:"bytes,1,opt,name=servicegrpc,proto3" json:"servicegrpc,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -178,23 +178,23 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// HealthAPIClient is the client API for HealthAPI service.
+// HealthAPIClient is the client API for HealthAPI servicegrpc.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type HealthAPIClient interface {
-	// If the requested service is unknown, the call will fail with status
+	// If the requested servicegrpc is unknown, the call will fail with status
 	// NOT_FOUND.
 	Check(ctx context.Context, in *CheckRequest, opts ...grpc.CallOption) (*CheckResponse, error)
-	// Performs a watch for the serving status of the requested service.
+	// Performs a watch for the serving status of the requested servicegrpc.
 	// The server will immediately send back a message indicating the current
 	// serving status.  It will then subsequently send a new message whenever
-	// the service's serving status changes.
+	// the servicegrpc's serving status changes.
 	//
-	// If the requested service is unknown when the call is received, the
+	// If the requested servicegrpc is unknown when the call is received, the
 	// server will send a message setting the serving status to
 	// SERVICE_UNKNOWN but will *not* terminate the call.  If at some
-	// future point, the serving status of the service becomes known, the
-	// server will send a new message with the service's serving status.
+	// future point, the serving status of the servicegrpc becomes known, the
+	// server will send a new message with the servicegrpc's serving status.
 	//
 	// If the call terminates with status UNIMPLEMENTED, then clients
 	// should assume this method is not supported and should not retry the
@@ -252,21 +252,21 @@ func (x *healthAPIWatchClient) Recv() (*CheckResponse, error) {
 	return m, nil
 }
 
-// HealthAPIServer is the server API for HealthAPI service.
+// HealthAPIServer is the server API for HealthAPI servicegrpc.
 type HealthAPIServer interface {
-	// If the requested service is unknown, the call will fail with status
+	// If the requested servicegrpc is unknown, the call will fail with status
 	// NOT_FOUND.
 	Check(context.Context, *CheckRequest) (*CheckResponse, error)
-	// Performs a watch for the serving status of the requested service.
+	// Performs a watch for the serving status of the requested servicegrpc.
 	// The server will immediately send back a message indicating the current
 	// serving status.  It will then subsequently send a new message whenever
-	// the service's serving status changes.
+	// the servicegrpc's serving status changes.
 	//
-	// If the requested service is unknown when the call is received, the
+	// If the requested servicegrpc is unknown when the call is received, the
 	// server will send a message setting the serving status to
 	// SERVICE_UNKNOWN but will *not* terminate the call.  If at some
-	// future point, the serving status of the service becomes known, the
-	// server will send a new message with the service's serving status.
+	// future point, the serving status of the servicegrpc becomes known, the
+	// server will send a new message with the servicegrpc's serving status.
 	//
 	// If the call terminates with status UNIMPLEMENTED, then clients
 	// should assume this method is not supported and should not retry the

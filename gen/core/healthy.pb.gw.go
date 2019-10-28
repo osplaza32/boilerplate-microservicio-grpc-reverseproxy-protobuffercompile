@@ -64,7 +64,7 @@ func local_request_HealthAPI_Check_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-// RegisterHealthAPIHandlerServer registers the http handlers for service HealthAPI to "mux".
+// RegisterHealthAPIHandlerServer registers the http handlers for servicegrpc HealthAPI to "mux".
 // UnaryRPC     :call HealthAPIServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 func RegisterHealthAPIHandlerServer(ctx context.Context, mux *runtime.ServeMux, server HealthAPIServer) error {
@@ -117,13 +117,13 @@ func RegisterHealthAPIHandlerFromEndpoint(ctx context.Context, mux *runtime.Serv
 	return RegisterHealthAPIHandler(ctx, mux, conn)
 }
 
-// RegisterHealthAPIHandler registers the http handlers for service HealthAPI to "mux".
+// RegisterHealthAPIHandler registers the http handlers for servicegrpc HealthAPI to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
 func RegisterHealthAPIHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
 	return RegisterHealthAPIHandlerClient(ctx, mux, NewHealthAPIClient(conn))
 }
 
-// RegisterHealthAPIHandlerClient registers the http handlers for service HealthAPI
+// RegisterHealthAPIHandlerClient registers the http handlers for servicegrpc HealthAPI
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "HealthAPIClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "HealthAPIClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
