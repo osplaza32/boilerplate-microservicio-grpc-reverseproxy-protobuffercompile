@@ -5,6 +5,8 @@ ENV GO111MODULE=on
 WORKDIR /app
 COPY go.mod .
 COPY go.sum .
+CMD ["make all"]
+
 RUN go mod download
 COPY . .
 RUN go build -o app  cmd/main.go

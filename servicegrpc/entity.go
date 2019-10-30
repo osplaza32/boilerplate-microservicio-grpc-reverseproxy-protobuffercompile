@@ -30,7 +30,7 @@ func (s *Server)Theotherfn(ctx context.Context,req *http.Request) metadata.MD{
 	s.GetLogUber().Info("GET entro GRPC")
 
 	as := metadata.MD{}
-	as.Set("x-apikey",req.Header.Get("x-apikey"))
+	as.Set("apikey",req.Header.Get("apikey"))
 	return as
 }
 
@@ -84,10 +84,10 @@ func (s *Server)unaryInterceptor(ctx context.Context, req interface{}, info *grp
 	}
 	s.loguber.Sugar().Info(meta)
 
-	if len(meta["x-apikey"]) != 1 {
+	if len(meta["apikey"]) != 1 {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid token")
 	}
-	if meta["x-apikey"][0] != "06320a5975084b9db9ebbdece33e7eb5" {
+	if meta["apikey"][0] != "123456" {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid token")
 	}
 

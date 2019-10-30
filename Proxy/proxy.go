@@ -25,7 +25,7 @@ func Run(s *servicegrpc.Server) error {
 		fmt.Println(err)
 		return err
 	}
-	s.GetLogUber().Info("GET STARED PROXY")
+	s.GetLogUber().Info("GET STARED PROXY lsxnlsnxlnlx")
 
 	return http.ListenAndServe(":8080", mux)
 }
