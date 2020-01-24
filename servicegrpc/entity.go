@@ -6,10 +6,11 @@ import (
 	"context"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
+	//"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"net"
 	"net/http"
+	"os"
 )
 
 
@@ -49,7 +50,7 @@ func NewServer(opts ...ServerOption) (*Server, error) {
 	logger, _ := zap.NewProduction()
 
 	s := &Server{
-		addr: ":50051",
+		addr: os.Getenv("PORT_GRPC"),
 		loguber:logger,
 	}
 	for _, opt := range opts {
@@ -78,7 +79,8 @@ func (s *Server) Start() (*grpc.Server, net.Listener, error) {
 	return gs, lis,nil
 }
 func (s *Server)unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error)  {
-	meta, ok := metadata.FromIncomingContext(ctx)
+	//meta, ok := metadata.FromIncomingContext(ctx)
+	/*
 	if !ok {
 		return nil, grpc.Errorf(codes.Unauthenticated, "missing context metadata")
 	}
@@ -89,7 +91,7 @@ func (s *Server)unaryInterceptor(ctx context.Context, req interface{}, info *grp
 	}
 	if meta["apikey"][0] != "123456" {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid token")
-	}
+	}*/
 
 	return handler(ctx, req)
 }

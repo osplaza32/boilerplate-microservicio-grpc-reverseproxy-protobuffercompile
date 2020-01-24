@@ -8,8 +8,9 @@ import (
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 "google.golang.org/grpc"
+	"os"
 
-"net/http"
+	"net/http"
 )
 
 func Run(s *servicegrpc.Server) error {
@@ -27,6 +28,6 @@ func Run(s *servicegrpc.Server) error {
 	}
 	s.GetLogUber().Info("GET STARED PROXY lsxnlsnxlnlx")
 
-	return http.ListenAndServe(":8080", mux)
+	return http.ListenAndServe(os.Getenv("PORT_HTTP"), mux)
 }
 

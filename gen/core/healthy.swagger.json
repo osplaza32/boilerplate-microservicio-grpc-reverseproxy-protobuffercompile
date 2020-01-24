@@ -4,10 +4,6 @@
     "title": "core/healthy.proto",
     "version": "version not set"
   },
-  "schemes": [
-    "http",
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],
@@ -99,20 +95,6 @@
           "$ref": "#/definitions/CheckResponseServingStatus"
         }
       }
-    }
-  },
-  "x-stream-definitions": {
-    "v1CheckResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/v1CheckResponse"
-        },
-        "error": {
-          "$ref": "#/definitions/runtimeStreamError"
-        }
-      },
-      "title": "Stream result of v1CheckResponse"
     }
   }
 }

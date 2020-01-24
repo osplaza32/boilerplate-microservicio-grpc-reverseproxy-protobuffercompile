@@ -17,7 +17,7 @@ vendor: ## dowload all dependecies
 	cd proto && glide install
 # general
 vendor-proto: ## dowload all dependecies
-	cd proto && glide install;
+	cd proto && glide install
 
 # coverage
 
@@ -65,9 +65,8 @@ image-deployment:
 	docker tag $(DOCKER_REPO):$(CURRENT_TAG) $(DOCKER_REPO):latest
 	docker push $(DOCKER_REPO):$(CURRENT_TAG)
 	kubectl set image deployment/automate-grcp-server --image=image:$(DOCKER_REPO):$(CURRENT_TAG)
-	kubectl expose deployment automate-grcp-server --type LoadBalancer --name=http --port 80 --target-port 8080
-    kubectl expose deployment automate-grcp-server --type LoadBalancer --name=grcp --port 50050 --target-port 50051
-register
+	kubectl expose deployment automate-grcp-server --type LoadBalancer --name=http --port 80 --target-port 8080 && kubectl expose deployment automate-grcp-server --type LoadBalancer --name=grcp --port 50050 --target-port 50051
+register:
 	docker build . -f $(DOCKER_FILE) -t $(DOCKER_REPO):$(CURRENT_TAG)
 	docker tag $(DOCKER_REPO):$(CURRENT_TAG) $(DOCKER_REPO):latest
 	docker push $(DOCKER_REPO):$(CURRENT_TAG)
